@@ -1,7 +1,15 @@
-import PropTypes from 'prop-types';
-import {ReactComponent as Remove} from '../assets/images/icon-remove.svg';
+import React, {MouseEventHandler} from "react"
+import {ReactComponent as Remove} from '../assets/images/icon-remove.svg'
 
-const Badge = ({
+interface IBadge {
+    variant?: string | string[];
+    colorScheme?: string | string[];
+    children: React.ReactNode;
+    onClear?: MouseEventHandler<HTMLDivElement>;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+}
+
+export const Badge: React.FC<IBadge> = ({
                    variant = 'basic',
                    colorScheme = 'light',
                    children,
@@ -21,13 +29,3 @@ const Badge = ({
     )}
     </div>
 );
-
-export {Badge};
-
-Badge.propTypes = {
-    variant: PropTypes.oneOf(['basic', 'clearable', 'rounded']),
-    colorScheme: PropTypes.oneOf(['light', 'primary', 'dark']),
-    children: PropTypes.node.isRequired,
-    onClear: PropTypes.func,
-    onClick: PropTypes.func,
-}

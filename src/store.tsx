@@ -2,7 +2,7 @@ import {configureStore} from "@reduxjs/toolkit"
 import {positionReducer} from "./features/positions/position-slice"
 import {filterReducer} from "./features/filter/filter-slice";
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         positions: positionReducer,
         filters: filterReducer,
@@ -10,3 +10,8 @@ export const store = configureStore({
 
     devTools: true,
 })
+
+export default store
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

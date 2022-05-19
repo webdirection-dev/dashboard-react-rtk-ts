@@ -1,16 +1,18 @@
-import {useDispatch} from 'react-redux'
+import React from "react"
+
+import {useAppDispatch} from "../../hook"
 import {addFilter} from "../filter/filter-slice"
+
 import JobPosition from './JobPosition'
+import {usePositions} from "./use-positions"
+import {useFetchPositions} from "./use-fetch-positions"
 
-import {usePositions} from "./use-positions";
-import {useFetchPositions} from "./use-fetch-positions";
-
-const JobList = () => {
+const JobList: React.FC = () => {
     useFetchPositions()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const positions = usePositions()
 
-    const handleAddFilter = (str) => {
+    const handleAddFilter = (str: string) => {
         dispatch(addFilter(str))
     }
 

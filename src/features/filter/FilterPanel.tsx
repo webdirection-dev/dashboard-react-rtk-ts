@@ -1,20 +1,21 @@
-import {useSelector, useDispatch} from "react-redux"
+import React from "react";
 
+import {useAppSelector, useAppDispatch} from "../../hook";
 import { Card } from '../../UI/Card'
 import { Stack } from '../../UI/Stack'
 import { Badge } from '../../UI/Badge'
 import {removeFilter, clearFilter, selectFilters} from './filter-slice'
 
-const FilterPanel = () => {
-    const dispatch = useDispatch()
-    const currentFilters = useSelector(selectFilters)
+const FilterPanel: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const currentFilters = useAppSelector(selectFilters)
 
     if (currentFilters.length === 0) return null
 
     return (
         <Card className="filter-panel">
             <div className="filter-panel-wrapper">
-                <Stack>
+                <Stack pos=''>
                     {
                         currentFilters.map(i => {
                             return(

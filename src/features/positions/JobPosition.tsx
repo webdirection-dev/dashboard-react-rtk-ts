@@ -1,9 +1,15 @@
-import PropTypes from 'prop-types'
+import React from "react";
+import {Position} from './position-slice'
 import { Badge } from '../../UI/Badge'
 import { Card } from '../../UI/Card'
 import { Stack } from '../../UI/Stack'
 
-const JobPosition = ({
+// слияние type Position and interface IProps
+interface IJobPosition extends Position {
+    handleAddFilter: (str: string) => void
+}
+
+const JobPosition: React.FC<IJobPosition> = ({
                          id,
                          company,
                          logo,
@@ -19,7 +25,8 @@ const JobPosition = ({
                          tools,
                          handleAddFilter,
                      }) => {
-    const badges = [].concat(role, level, ...languages, ...tools);
+    let badges: string[] = []
+    badges = badges.concat(role, level, ...languages, ...tools)
 
     return (
         <Card isFeatured={featured}>
@@ -36,7 +43,7 @@ const JobPosition = ({
                             <h3>{company}</h3>
 
                             {(isNew || featured) && (
-                                <Stack>
+                                <Stack pos=''>
                                     {isNew && (
                                         <Badge variant="rounded" colorScheme="primary">
                                             NEW!
@@ -55,7 +62,7 @@ const JobPosition = ({
                             {position}
                         </h2>
 
-                        <Stack>
+                        <Stack pos=''>
                             <div className='job-position-meta'>
                                 {postedAt}
                             </div>
@@ -71,7 +78,7 @@ const JobPosition = ({
                     </div>
                 </div>
 
-                <Stack>
+                <Stack pos=''>
                     {badges.map(item => (
                         <Badge
                             key={item}
@@ -84,21 +91,4 @@ const JobPosition = ({
     )
 }
 
-export default JobPosition;
-
-JobPosition.propTypes = {
-    id: PropTypes.number,
-    company: PropTypes.string,
-    logo: PropTypes.string,
-    new: PropTypes.bool,
-    featured: PropTypes.bool,
-    position: PropTypes.string,
-    role: PropTypes.string,
-    level: PropTypes.string,
-    postedAt: PropTypes.string,
-    contract: PropTypes.string,
-    location: PropTypes.string,
-    languages: PropTypes.arrayOf(PropTypes.string),
-    tools: PropTypes.arrayOf(PropTypes.string),
-    handleAddFilter: PropTypes.func,
-};
+export default JobPosition
